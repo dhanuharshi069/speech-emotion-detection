@@ -12,3 +12,26 @@ artifacts/*_final.*
 .claude/
 graphify-out/
 CLAUDE.md
+
+
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.env
+.streamlit/secrets.toml
+.pytest_cache/
+.mypy_cache/
+.DS_Store
+
+# Datasets and generated files
+data/raw/
+data/processed/
+*.wav
+*.mp3
+*.ogg
+
+# Generated model files: keep only if intentionally publishing
+# *.pkl
+# *.h5
+# *.keras
