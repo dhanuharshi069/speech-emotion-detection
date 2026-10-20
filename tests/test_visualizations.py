@@ -32,3 +32,11 @@ def test_feature_figures_build():
     mfcc = np.zeros((config.N_MFCC, config.N_FRAMES), dtype=np.float32)
     assert viz.mel_figure(logmel).data[0].z.shape == logmel.shape
     assert viz.mfcc_figure(mfcc).data[0].z.shape == mfcc.shape
+
+def test_mfcc_display_is_scaled_per_coefficient():
+    rng = np.random.default_rng(0)
+    scale = np.arange(1, config.N_MFCC + 1)[:, None]
+    mfcc = (rng.normal(0, 1, (config.N_MFCC, config.N_FRAMES)) * scale).astype(np.float32)
+    z = np.asarray(viz.mfcc_figure(mfcc).data[0].z)
+    assert np.allclose(z.mean(axis=1), 0, atol=1e-3)
+    assert np.allclose(z.std(axis=1), 1, atol=1e-3)

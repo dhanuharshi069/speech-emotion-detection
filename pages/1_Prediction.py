@@ -79,6 +79,8 @@ def render_result(pred: Prediction) -> None:
         ui.show_figure(viz.mel_figure(pred.features["logmel"]))
     if st.checkbox("Show MFCCs", key="show_mfcc"):
         ui.show_figure(viz.mfcc_figure(pred.features["mfcc"]))
+        st.caption("Each MFCC coefficient is scaled to zero mean and unit variance over the clip, "
+                   "for display only. The model does not use MFCCs.")
     with st.expander("What the model analyzes"):
         for paragraph in ui.FEATURE_EXPLANATION:
             st.markdown(paragraph)

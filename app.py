@@ -32,10 +32,12 @@ def home() -> None:
             st.audio(data, format=ui.audio_mime(uploaded.name))
         if not status["ready"]:
             st.error("Model files not found: " + ", ".join(status["missing"]) + ". Run `python train.py` first.")
-        if st.button("Analyze audio", type="primary", key="home_analyze",
-                     disabled=uploaded is None or not status["ready"]):
-            st.session_state["auto_run"] = True
-            st.switch_page("pages/1_Prediction.py")
+        if st.button("Analyze audio", type="primary", key="home_analyze", disabled=not status["ready"]):
+            if uploaded is None:
+                ui.show_note("Choose an audio file above, then press Analyze audio.", title="No audio selected")
+            else:
+                st.session_state["auto_run"] = True
+                st.switch_page("pages/1_Prediction.py")
         ui.show_note(
             "The result is a prediction of the emotion expressed in the voice. "
             "It does not measure how the speaker actually feels."

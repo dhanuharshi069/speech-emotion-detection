@@ -19,9 +19,9 @@ def _style(fig: go.Figure, height: int) -> go.Figure:
         font=dict(family=FONT, size=13, color=INK),
     )
     fig.update_xaxes(linecolor=BORDER, gridcolor=GRID, zeroline=False, automargin=True,
-                     tickfont=dict(family=MONO, size=12, color=MUTED))
+                     title_standoff=8, tickfont=dict(family=MONO, size=12, color=MUTED))
     fig.update_yaxes(linecolor=BORDER, gridcolor=GRID, zeroline=False, automargin=True,
-                     tickfont=dict(family=MONO, size=12, color=MUTED))
+                     title_standoff=8, tickfont=dict(family=MONO, size=12, color=MUTED))
     return fig
 
 
@@ -114,13 +114,16 @@ def history_figure(history: dict, key: str, axis_title: str, selected_epoch: int
 
 def mfcc_figure(mfcc: np.ndarray, sr: int = config.SAMPLE_RATE,
                 hop_length: int = config.HOP_LENGTH) -> go.Figure:
+    """MFCC heatmap. Each coefficient is z-scored over time for display only."""
     n_coef, n_frames = mfcc.shape
+    scaled = (mfcc - mfcc.mean(axis=1, keepdims=True)) / np.clip(mfcc.std(axis=1, keepdims=True), 1e-6, None)
     fig = go.Figure(go.Heatmap(
-        z=mfcc, x=np.arange(n_frames) * hop_length / sr, y=np.arange(n_coef),
+        z=scaled, x=np.arange(n_frames) * hop_length / sr, y=np.arange(n_coef),
+        zmin=-3, zmax=3, customdata=mfcc,
         colorscale=[[0.0, "#F7F6F2"], [1.0, ACCENT]],
-        colorbar=dict(title=dict(text="value", font=dict(family=MONO, size=12)),
+        colorbar=dict(title=dict(text="z-score", font=dict(family=MONO, size=12)),
                       thickness=12, outlinewidth=0, tickfont=dict(family=MONO, size=11)),
-        hovertemplate="%{x:.2f} s, coefficient %{y}: %{z:.1f}<extra></extra>",
+        hovertemplate="%{x:.2f} s, coefficient %{y}: %{customdata:.1f} (z %{z:.1f})<extra></extra>",
     ))
     _style(fig, 260)
     fig.update_xaxes(title_text="Time (s)", showgrid=False)

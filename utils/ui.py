@@ -76,6 +76,7 @@ _CSS = f"""
 .kv, .data, .emotions {{ border: 0 !important; }}
 .kv td, .data th, .data td, .emotions td {{ border-width: 0 0 1px 0 !important; border-style: solid !important; border-color: var(--border) !important; background: transparent !important; }}
 [data-testid="stPlotlyChart"] {{ border: 1px solid var(--border); border-radius: 8px; overflow: hidden; background: var(--surface); }}
+[data-testid="stHeaderActionElements"] {{ display: none !important; }}
 @media (max-width: 640px) {{
   [data-testid="stMainBlockContainer"], .block-container {{ padding: 1.5rem 1rem 3rem !important; }}
   .stApp h1 {{ font-size: 1.75rem; }}
