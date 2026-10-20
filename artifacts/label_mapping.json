@@ -1,0 +1,36 @@
+{
+  "target_emotions": [
+    "angry",
+    "happy",
+    "neutral",
+    "sad"
+  ],
+  "label_to_id": {
+    "angry": 0,
+    "happy": 1,
+    "neutral": 2,
+    "sad": 3
+  },
+  "id_to_label": {
+    "0": "angry",
+    "1": "happy",
+    "2": "neutral",
+    "3": "sad"
+  },
+  "ravdess_emotion_codes": {
+    "01": "neutral",
+    "02": "calm",
+    "03": "happy",
+    "04": "sad",
+    "05": "angry",
+    "06": "fearful",
+    "07": "disgust",
+    "08": "surprised"
+  },
+  "excluded_emotions": [
+    "calm",
+    "disgust",
+    "fearful",
+    "surprised"
+  ]
+}

@@ -1,0 +1,14 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+data/raw/
+*.zip
+.DS_Store
+artifacts/features.npz
+artifacts/features_aug.npz
+models/*_final.keras
+artifacts/*_final.*
+.claude/
+graphify-out/
+CLAUDE.md

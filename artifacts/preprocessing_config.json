@@ -1,0 +1,14 @@
+{
+  "sample_rate": 22050,
+  "clip_duration": 3.0,
+  "n_samples": 66150,
+  "trim_top_db": 30,
+  "n_fft": 1024,
+  "hop_length": 256,
+  "n_mels": 64,
+  "n_mfcc": 40,
+  "n_frames": 259,
+  "logmel_ref": 1.0,
+  "logmel_top_db": 80.0,
+  "seed": 42
+}
